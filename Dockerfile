@@ -1,13 +1,6 @@
 FROM rocker/tidyverse
 LABEL maintainer="Ignacio Martinez <ignacio@protonmail.com>"
 
-# ------------------------------
-# Install rstanarm and friends
-# ------------------------------
-# Docker Hub (and Docker in general) chokes on memory issues when compiling
-# with gcc, so copy custom CXX settings to /root/.R/Makevars and use ccache and
-# clang++ instead
-
 # Make ~/.R
 RUN mkdir -p $HOME/.R
 
@@ -21,7 +14,9 @@ COPY R/Makevars /root/.R/Makevars
 RUN apt-get -y --no-install-recommends install \
     ed \
     clang  \
-    ccache 
+    ccache \
+&& install2.r --error \
+StanHeaders 
         
         
 
