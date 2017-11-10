@@ -18,7 +18,8 @@ RUN apt-get -y --no-install-recommends install \
     libicu-dev \
     liblzma-dev \
 ## V8
-    libv8-3.14-dev
+    libv8-3.14-dev \
+## Install R packages
     && install2.r --error \
     StanHeaders rstan
         
