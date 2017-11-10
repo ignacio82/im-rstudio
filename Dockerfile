@@ -8,7 +8,9 @@ RUN apt-get update \
     ## used to build rJava and other packages
     libbz2-dev \
     libicu-dev \
-    liblzma-dev
+    liblzma-dev \
+    ## V8
+    libv8-3.14-dev
 
 
 ## configure JAVA and install rJava package
@@ -19,8 +21,9 @@ RUN R -e "install.packages('rJava', dependencies = TRUE, repos='https://cran.rst
 RUN install2.r --error \
         secret \
         drat \
+        V8 \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls'));" \
+        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMBayesian'));" \
     ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
