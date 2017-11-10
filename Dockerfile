@@ -15,11 +15,3 @@ RUN R -e "install.packages('rJava', dependencies = TRUE, repos='https://cran.rst
 
 
 # Install Packages
-RUN install2.r --error \
-        rJava \
-        secret \
-        drat \
-        && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls'));" \
-    ## clean up
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
