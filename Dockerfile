@@ -31,7 +31,7 @@ RUN apt-get -y --no-install-recommends install \
         drat \
         V8 \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls'));" \
+        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMBayesian'));" \
     ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
         
