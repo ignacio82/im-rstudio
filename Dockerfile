@@ -11,8 +11,16 @@ RUN apt-get -y --no-install-recommends install \
     ed \
     clang  \
     ccache \
-&& install2.r --error \
-StanHeaders rstan
+## for rJava
+    default-jdk \
+## used to build rJava and other packages
+    libbz2-dev \
+    libicu-dev \
+    liblzma-dev \
+## V8
+    libv8-3.14-dev
+    && install2.r --error \
+    StanHeaders rstan
         
         
 
