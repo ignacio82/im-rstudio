@@ -8,7 +8,7 @@ RUN apt-get update \
     ## used to build rJava and other packages
     libbz2-dev \
     libicu-dev \
-    liblzma-dev \
+    liblzma-dev
 
 
 ## configure JAVA and install rJava package
