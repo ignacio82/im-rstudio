@@ -16,7 +16,7 @@ RUN apt-get -y --no-install-recommends install \
     clang  \
     ccache \
 && install2.r --error \
-StanHeaders 
+StanHeaders rstan rstanarm
         
         
 
