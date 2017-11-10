@@ -1,4 +1,4 @@
-FROM rocker/tidyverse
+FROM andrewheiss/tidyverse-rstanarm
 LABEL maintainer="Ignacio Martinez <ignacio@protonmail.com>"
 
 RUN apt-get update \
