@@ -23,8 +23,6 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
 RUN echo "/usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/" > /etc/ld.so.conf.d/rJava.conf
 RUN /sbin/ldconfig
 
-## Install rJava package
-RUN install2.r --error rJava 
 
 # Install Packages
 RUN install2.r --error \
