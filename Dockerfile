@@ -21,7 +21,10 @@ RUN apt-get -y --no-install-recommends install \
     libv8-3.14-dev \
 ## Install R packages
     && install2.r --error \
-    StanHeaders rstan
+    StanHeaders rstan \
+## configure JAVA and install rJava package
+   && R CMD javareconf \
+   && R -e "install.packages('rJava', dependencies = TRUE, repos='https://cran.rstudio.com/')"
         
         
 
