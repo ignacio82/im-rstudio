@@ -19,9 +19,8 @@ RUN apt-get -y --no-install-recommends install \
     liblzma-dev \
 ## V8
     libv8-3.14-dev \
-## Install R packages
-    && install2.r --error \
-    StanHeaders rstan \
+## ssh
+    openssh-client \
 ## configure JAVA and install rJava package
    && R CMD javareconf \
    && R -e "install.packages('rJava', dependencies = TRUE, repos='https://cran.rstudio.com/')" \
@@ -30,13 +29,10 @@ RUN apt-get -y --no-install-recommends install \
         secret \
         drat \
         V8 \
+        googleComputeEngineR \
+        googleCloudStorageR \
+        StanHeaders rstan rstanarm \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMBayesian'));" \
     ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-        
-        
-
-
-
-
