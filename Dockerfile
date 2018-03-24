@@ -13,6 +13,7 @@ RUN apt-get -y --no-install-recommends install \
     clang  \
     ccache \
     htop \
+    libgpgme11-dev \
 ## V8
     libv8-3.14-dev \
 ## ssh
@@ -29,6 +30,7 @@ RUN apt-get -y --no-install-recommends install \
         blogdown tictoc \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior', 'IMBayesian'))" \
+   && RUN installGithub.r hrbrmstr/keybase \
 ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
         
