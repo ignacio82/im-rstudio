@@ -13,7 +13,7 @@ RUN apt-get -y --no-install-recommends install \
     clang  \
     ccache \
     htop \
-    libgpgme11-dev \
+    libgpgme11-dev libappindicator1 fuse libgconf-2-4 \
 ## V8
     libv8-3.14-dev \
 ## ssh
@@ -30,7 +30,15 @@ RUN apt-get -y --no-install-recommends install \
         blogdown tictoc \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior', 'IMBayesian'))" \
-   && RUN installGithub.r hrbrmstr/keybase \
+   && RUN installGithub.r rstudio/rscrypt hrbrmstr/keybase \
 ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+    
+## Keybase
+
+RUN wget https://prerelease.keybase.io/keybase_amd64.deb \
+&& dpkg -i keybase_amd64.deb \
+&&  apt-get install -f \
+&&  run_keybase \
+&&  rm keybase_amd64.deb \
         
