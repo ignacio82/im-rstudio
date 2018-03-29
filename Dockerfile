@@ -35,7 +35,6 @@ RUN installGithub.r rstudio/rscrypt hrbrmstr/keybase \
    && wget https://prerelease.keybase.io/keybase_amd64.deb \
    && dpkg -i keybase_amd64.deb \
    &&  apt-get install -f \
-   &&  run_keybase \
    &&  rm keybase_amd64.deb \
 ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
