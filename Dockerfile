@@ -26,7 +26,7 @@ RUN apt-get -y --no-install-recommends install \
         V8 \
         Julia future future.apply\
         StanHeaders rstan rstanarm KernSmooth \
-        ggjoy optmatch ghit zip\
+        ggjoy optmatch zip\
         blogdown tictoc \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior', 'IMBayesian'))"
