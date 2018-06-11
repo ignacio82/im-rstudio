@@ -14,6 +14,7 @@ RUN apt-get -y --no-install-recommends install \
     ccache \
     htop \
     libgpgme11-dev libappindicator1 fuse libgconf-2-4 \
+    python-pip \
 ## V8
     libv8-3.14-dev \
 ## ssh
@@ -30,6 +31,8 @@ RUN apt-get -y --no-install-recommends install \
         blogdown tictoc \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior', 'IMBayesian'))"
+
+RUN pip install awscli --upgrade --user
 
 RUN installGithub.r rstudio/rscrypt hrbrmstr/keybase \
    && wget https://prerelease.keybase.io/keybase_amd64.deb \
