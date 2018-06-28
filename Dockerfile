@@ -15,6 +15,7 @@ RUN apt-get -y --no-install-recommends install \
     htop \
     libgpgme11-dev libappindicator1 fuse libgconf-2-4 \
     python-pip \
+    ca-certificates \
 ## V8
     libv8-3.14-dev \
 ## ssh
@@ -41,6 +42,8 @@ RUN installGithub.r rstudio/rscrypt hrbrmstr/keybase \
    &&  rm keybase_amd64.deb \
 ## clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+    
+RUN update-ca-certificates
     
 RUN build_deps="curl ca-certificates" && \
     apt-get update && \
