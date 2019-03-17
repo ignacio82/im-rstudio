@@ -31,17 +31,10 @@ RUN apt-get -y --no-install-recommends install \
         ggjoy optmatch zip\
         blogdown tictoc \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior', 'IMBayesian'))"
+        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior'))"
 
-RUN pip install awscli --upgrade --user
-
-RUN installGithub.r rstudio/rscrypt hrbrmstr/keybase \
-   && wget https://prerelease.keybase.io/keybase_amd64.deb \
-   && dpkg -i keybase_amd64.deb \
-   &&  apt-get install -f \
-   &&  rm keybase_amd64.deb \
 ## clean up
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+RUN rm -rf /tmp/downloaded_packages/ /tmp/*.rds
     
 RUN update-ca-certificates
     
