@@ -1,0 +1,20 @@
+version: '3'
+services:
+    imremoter:
+      container_name: imrstudiotest
+      image: ignacio82/im-rstudio
+      ports:
+          - "80:8787"
+      restart: unless-stopped
+      environment:
+          - TZ=america/new_york
+          - USER=ignacio
+          - PASSWORD=your_password
+          - DISABLE_AUTH=false
+          - ROOT=true
+      volumes:
+          - ~/.ssh:$HOME/.ssh
+          - /nfs/R/Projects:$HOME/projects
+     
+      
+
