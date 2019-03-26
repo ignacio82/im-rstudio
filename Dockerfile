@@ -1,50 +1,67 @@
-FROM rocker/tidyverse
+FROM rocker/verse:latest
 LABEL maintainer="Ignacio Martinez <ignacio@protonmail.com>"
 
 # Make ~/.R
-RUN mkdir -p $HOME/.R
+RUN mkdir -p $HOME/.R 
 
 # $HOME doesn't exist in the COPY shell, so be explicit
-COPY R/Makevars /root/.R/Makevars
+COPY R/Makevars root/.R/Makevars 
 
+RUN echo "rstan::rstan_options(auto_write = TRUE)\n" >> /home/rstudio/.Rprofile \
+    && echo "options(mc.cores = parallel::detectCores())\n" >> /home/rstudio/.Rprofile
 
-RUN apt-get -y --no-install-recommends install \
-    ed \
-    clang  \
-    ccache \
-    htop \
-    libgpgme11-dev libappindicator1 fuse libgconf-2-4 \
-    python-pip \
-    ca-certificates \
+RUN apt-get update \
+   && apt-get -y --no-install-recommends install \
+      apt-utils \
+      ed \
+      libnlopt-dev \
+      python-pip \
 ## V8
-    libv8-3.14-dev \
-## ssh
-    openssh-client \
+    libv8-dev \
+## sodium
+    libsodium-dev \
+# Update Pandoc
+   && wget https://github.com/jgm/pandoc/releases/download/2.7.1/pandoc-2.7.1-1-amd64.deb \
+   && dpkg -i pandoc-2.7.1-1-amd64.deb \
+   && rm pandoc-2.7.1-1-amd64.deb \
+   && rm  /usr/lib/rstudio-server/bin/pandoc/pandoc \
+   && rm /usr/lib/rstudio-server/bin/pandoc/pandoc-citeproc \
+   && ln -s /usr/local/bin/pandoc /usr/lib/rstudio-server/bin/pandoc/ \
+   && ln -s /usr/local/bin/pandoc-citeproc /usr/lib/rstudio-server/bin/pandoc/ \
 # Install Packages
    && install2.r --error \
-        googleComputeEngineR googleCloudStorageR \
+        googleComputeEngineR \
+        googleCloudStorageR \
         secret \
         drat \
         V8 \
-        Julia future future.apply\
-        StanHeaders rstan rstanarm KernSmooth \
-        ggjoy optmatch zip\
-        blogdown tictoc \
+        Julia \
+        future \
+        future.apply\
+        StanHeaders \
+        rstan \
+        rstanarm \
+        KernSmooth \
+        ggjoy \
+        optmatch \
+        zip \
+        blogdown \
+        tictoc \
+        remotes \
+        remoter \
+        sodium  \
+        bayesplot \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'IMWatson', 'themeIM', 'yourls', 'IMPosterior'))"
+        install.packages(c('IMSecrets', 'themeIM', 'IMPosterior'))" \
+  && pip install wheel \ 
+  && pip install awscli\
+  && R -e "remotes::install_github('rstudio/pagedown')" \
+    ## Clean up
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-## clean up
-RUN rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
+
     
-RUN update-ca-certificates
-    
-RUN build_deps="curl ca-certificates" && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ${build_deps} && \
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends git-lfs && \
-    git lfs install && \
-    DEBIAN_FRONTEND=noninteractive apt-get purge -y --auto-remove ${build_deps} && \
-    rm -r /var/lib/apt/lists/*
+
 
         
