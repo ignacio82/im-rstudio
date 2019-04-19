@@ -1,13 +1,13 @@
 version: '3'
 services:
-    imremoter:
+    imrstudio:
       container_name: imrstudiotest
       image: ignacio82/im-rstudio
       ports:
           - "80:8787"
       restart: unless-stopped
       environment:
-          - TZ=america/new_york
+          - TZ=America/New_York
           - USER=ignacio
           - PASSWORD=your_password
           - DISABLE_AUTH=false
