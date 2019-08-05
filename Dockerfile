@@ -40,7 +40,7 @@ RUN apt-get update \
         future.apply\
         StanHeaders \
         rstan \
-        rstanarm \
+        rstantools \
         KernSmooth \
         ggjoy \
         optmatch \
