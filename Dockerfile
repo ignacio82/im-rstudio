@@ -15,7 +15,6 @@ RUN apt-get update \
       apt-utils \
       ed \
       libnlopt-dev \
-      python-pip \
 ## V8
     libv8-dev \
 ## sodium
@@ -54,8 +53,6 @@ RUN apt-get update \
         vizdraws \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
         install.packages(c('IMSecrets', 'themeIM'))" \
-  && pip install wheel \ 
-  && pip install awscli\
   && R -e "remotes::install_github('rstudio/pagedown')" \
   && R -e "remotes::install_github('brentthorne/posterdown')" \
     ## Clean up
