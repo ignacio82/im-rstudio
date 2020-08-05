@@ -51,11 +51,13 @@ RUN apt-get update \
         remoter \
         sodium  \
         bayesplot \
+        vizdraws \
         && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'themeIM', 'IMPosterior'))" \
+        install.packages(c('IMSecrets', 'themeIM'))" \
   && pip install wheel \ 
   && pip install awscli\
   && R -e "remotes::install_github('rstudio/pagedown')" \
+  && R -e "remotes::install_github('brentthorne/posterdown')" \
     ## Clean up
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
