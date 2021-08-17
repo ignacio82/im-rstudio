@@ -56,8 +56,6 @@ RUN apt-get update \
         gridExtra \
         openintro \
         scales \
-        && R -e "drat::addRepo(account = 'Ignacio', alturl = 'https://drat.ignacio.website/'); \
-        install.packages(c('IMSecrets', 'themeIM'))" \
   && installGithub.r \
         ignacio82/vizdraws \
   && R -e "remotes::install_github('rstudio/pagedown')" \
